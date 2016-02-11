@@ -1,1 +1,19 @@
-Not ready yet
+The usage of this library is very straightforward:
+
+    private int _age;
+    [ValidateAge(ErrorMessage = "Age is not valid")]
+    public int Age
+    {
+        get { return _age; }
+        set
+        {
+            if (_age != value)
+            {
+                _age = value;
+                RaisePropertyChangedEvent(() => Age);
+                ValidatePropertyAsync(value, () => Age, null);
+            }
+        }
+    }
+  
+It simplifies how to call the validation for properties. It also can capture the type conversion error, which you will not see in the WPF asynchronous validation code in the Internet.
